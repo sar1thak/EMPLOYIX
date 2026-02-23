@@ -1,16 +1,131 @@
-# React + Vite
+# 🚀 EMS — Employee Management System (SaaS UI)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **SaaS-style Employee Management System** built with React, Three.js and Tailwind.
+Designed with production-grade UI/UX inspired by real startup dashboards.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🌐 Live Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🔗 https://employix-iota.vercel.app/
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🧠 Features
+
+### 👨‍💼 Admin Panel
+
+* Create & assign tasks
+* Track employee performance
+* View all employees
+* Task analytics dashboard
+* Settings panel
+
+### 👨‍💻 Employee Panel
+
+* Accept new tasks
+* Mark completed/failed
+* Real-time task counters
+* Modern SaaS dashboard UI
+
+### 🎨 UI/UX
+
+* Modern SaaS design (glassmorphism)
+* 3D animated login (Three.js)
+* Particle animated background
+* Fully responsive dashboard
+* Smooth micro-interactions
+
+---
+
+## 🛠 Tech Stack
+
+**Frontend**
+
+* React.js (Vite)
+* Tailwind CSS
+* Three.js
+* React Three Fiber
+
+**State & Storage**
+
+* Context API
+* LocalStorage Auth System
+
+**Design**
+
+* Glassmorphism UI
+* SaaS Dashboard Layout
+* Animated 3D background
+
+---
+
+## 📸 Screenshots
+
+### 🔐 Login Page
+
+<img width="1909" height="982" alt="image" src="https://github.com/user-attachments/assets/be41c56a-4d77-46cd-b874-8b28f7961bc7" />
+
+
+### 📊 Admin Dashboard
+
+<img width="1901" height="979" alt="image" src="https://github.com/user-attachments/assets/3169a9bb-8301-4cd4-8d9d-fc40961bcb4b" />
+
+
+### 👨‍💻 Employee Dashboard
+
+<img width="1898" height="981" alt="image" src="https://github.com/user-attachments/assets/956e8cf1-2778-4ed1-9dd5-75bd1d1266e9" />
+
+
+---
+
+## ⚙️ Installation & Run Locally
+
+Clone repo:
+
+```bash
+git clone https://github.com/sar1thak/EMPLOYIX.git
+cd EMPLOYIX
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run:
+
+```bash
+npm run dev
+```
+
+---
+
+## 🚀 Deployment
+
+Deployed using **Vercel**
+
+To deploy:
+
+```bash
+npm run build
+```
+
+Upload dist folder to Vercel.
+
+---
+
+## 🧑‍💻 Author
+
+**Your Name**
+
+* GitHub: https://github.com/sar1thak
+* LinkedIn: https://www.linkedin.com/in/sarthak-shukla-794739298/
+
+---
+
+## ⭐ If you like this project
+
+Give it a star on GitHub — helps a lot!
