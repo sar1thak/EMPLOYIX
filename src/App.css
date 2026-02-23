@@ -1,0 +1,44 @@
+#root{
+  min-height:100vh;
+  width:100%;
+  position:relative;
+  isolation:isolate; 
+}
+
+#root > div{
+  text-align:left;
+}
+
+.app-container{
+  min-height:100vh;
+  padding:2rem 3rem;
+  position:relative;
+  z-index:10;
+}
+
+.section{
+  background:rgba(255,255,255,0.03);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:24px;
+  padding:2rem;
+}
+
+.shadow-soft{
+  box-shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+
+.lift{
+  transition:all .3s ease;
+}
+.lift:hover{
+  transform:translateY(-4px);
+}
+
+.nav-glass{
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+
