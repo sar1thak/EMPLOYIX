@@ -1,145 +1,94 @@
-# 🚀 Employix — Full Stack SaaS Employee Management Platform
+#  Employix — Full Stack Employee Management SaaS Platform
 
-A production-style **full-stack Employee Management SaaS** built with modern web technologies.
-Employix replicates real startup dashboards with secure authentication, role-based access, analytics, invites, and a premium glassmorphism UI.
+A modern, production-grade **Employee Management SaaS Platform** built with a scalable MERN architecture and Google OAuth authentication.
+Employix replicates real-world internal company dashboards used by startups to manage employees, tasks, and analytics.
 
-Designed as a **resume-grade + internship-ready** project demonstrating real SaaS architecture.
+Designed with **industry-level UI/UX, authentication architecture, and backend systems**, this project demonstrates full-stack engineering capability suitable for internships and production environments.
 
 ---
 
-# 🌐 Live Demo
+## 🌐 Live Deployment
 
-Frontend (Vercel):
+**Frontend (Vercel)**
 https://employix-iota.vercel.app/
 
-> Full backend + OAuth works locally with MongoDB Atlas.
+**Backend (Render API)**
+https://employix-backend.onrender.com
 
 ---
 
-# 🧠 What This Project Demonstrates
+## 🧠 Core Overview
 
-This is not just a frontend dashboard.
-It is a **complete SaaS architecture** including:
+Employix is a multi-role SaaS dashboard that enables organizations to:
 
-* OAuth authentication
-* Role-based access (Admin / Employee)
-* Invite system
-* Analytics dashboard
-* Notifications system
-* Audit logs
-* Secure backend APIs
-* MongoDB persistence
-* Production UI/UX
+* Authenticate users securely via Google OAuth or email/password
+* Manage employees and tasks
+* Track productivity and analytics
+* Send invitations and manage onboarding
+* Maintain audit logs and notifications
+* Handle password recovery and account management
 
-Built to simulate how real startups build internal productivity tools.
+Built to simulate real SaaS systems used by modern startups.
 
 ---
 
-# 👨‍💼 User Roles
-
-## 🛡 Admin
-
-Admin controls the organization.
-
-**Capabilities**
-
-* Invite employees via secure invite link
-* Assign tasks
-* Track employee productivity
-* View analytics dashboard
-* Manage notifications
-* Audit logs for all actions
-* Reset password
-* Google OAuth login
-
----
-
-## 👨‍💻 Employee
-
-Employees interact with assigned work.
-
-**Capabilities**
-
-* Accept tasks
-* Mark completed / failed
-* View personal dashboard
-* Receive notifications
-* Google OAuth login
-* Password login after first setup
-* Invite-based onboarding
-
----
-
-# ✨ Core Features
+# ✨ Key Features
 
 ## 🔐 Authentication System
 
-* Google OAuth (Admin + Employee)
-* Email/password login
-* JWT authentication
-* Password reset via email flow
-* Secure token-based sessions
-
-## 📨 Invite System (Advanced)
-
-* Admin can invite employees
-* Secure invite links
-* Resend / revoke invites
-* Invite validation endpoint
-* First-time onboarding flow
-
-## 📊 Analytics Dashboard
-
-* Task completion stats
-* Productivity tracking
-* Team performance metrics
-* Date-range filtering
-
-## 🔔 Notification System
-
-* In-app notifications
-* Due-soon reminders
-* Mark as read / read all
-* Personal notification center
-
-## 🧾 Audit Logs
-
-Tracks:
-
-* Invites
-* Task creation
-* Password changes
-* Authentication events
-
-## 📋 Task Management
-
-Admin:
-
-* Create tasks
-* Assign employees
-* Track team tasks
-
-Employee:
-
-* Accept tasks
-* Complete / fail tasks
-* Real-time counters
-* Filter & search
+* Google OAuth 2.0 login (Admin & Employee)
+* JWT-based session management
+* Email/password login support
+* Forgot/reset password flow
+* Secure token-based authentication
+* Role-based access control
 
 ---
 
-# 🎨 UI/UX Highlights
+## 👨‍💼 Admin Dashboard
 
-* Modern SaaS dashboard design
-* Glassmorphism interface
-* Animated gradients
-* 3D login background (Three.js)
-* Responsive layout
+* Create & assign tasks to employees
+* Invite employees via secure token link
+* Monitor team productivity
+* View analytics dashboard
+* Manage employee list
+* Notification system
+* Audit logs for actions
+
+---
+
+## 👨‍💻 Employee Dashboard
+
+* Accept assigned tasks
+* Mark tasks complete/failed
+* Real-time task counters
+* Personal notifications
+* Password management
+* Clean SaaS dashboard UI
+
+---
+
+## 📊 Advanced Backend Features
+
+* Invite lifecycle management (create, resend, revoke)
+* Audit logging system
+* Notification engine
+* Secure REST API architecture
+* Role-based middleware
+* MongoDB schema design with indexing
+* Production-ready error handling
+* Environment-based config
+
+---
+
+## 🎨 UI/UX Highlights
+
+* Modern SaaS glassmorphism design
+* Fully responsive dashboard
+* 3D animated login screen (Three.js)
 * Smooth micro-interactions
-* Premium dark theme
-
-Inspired by:
-Linear • Notion • Slack • Stripe dashboards
+* Clean component architecture
+* Production-level layout design
 
 ---
 
@@ -149,215 +98,194 @@ Linear • Notion • Slack • Stripe dashboards
 
 * React.js (Vite)
 * Tailwind CSS
-* Three.js
-* React Three Fiber
+* React Router
+* Three.js + React Three Fiber
 * Context API
 
 ## Backend
 
 * Node.js
 * Express.js
-* MongoDB (Mongoose)
+* MongoDB Atlas
+* Mongoose ODM
+* Passport.js (Google OAuth)
 * JWT Authentication
-* Google OAuth 2.0
 
 ## Dev & Deployment
 
-* Vercel (frontend)
-* MongoDB Atlas
-* GitHub
+* Vercel (Frontend)
+* Render (Backend)
+* MongoDB Atlas (Database)
+* GitHub (Version Control)
 
 ---
 
-# 📁 Project Structure
+# 🏗 Architecture
+
+Client (React)
+⬇
+Express API (Node.js backend)
+⬇
+MongoDB Atlas (Cloud database)
+
+Authentication flow:
+Google OAuth → Backend → JWT → Frontend → Protected Routes
+
+---
+
+# 📂 Project Structure
 
 ```
-Employix
+EMPLOYIX/
 │
-├── src/                # Frontend (React)
-├── server/             # Backend (Node + Express)
-├── public/
-├── .env
+├── src/                    # Frontend React app
+├── server/
+│   ├── src/
+│   │   ├── config/         # Passport & DB config
+│   │   ├── models/         # MongoDB models
+│   │   ├── routes/         # API routes
+│   │   ├── middleware/     # Auth middleware
+│   │   ├── app.js          # Express app
+│   │   └── server.js       # Entry point
+│   └── .env
+│
 └── README.md
 ```
 
 ---
 
-# ⚙️ Local Setup (Full Stack)
+# ⚙️ Local Development Setup
 
-## 1️⃣ Clone Repository
+## 1. Clone Repository
 
-```bash
+```
 git clone https://github.com/sar1thak/EMPLOYIX.git
 cd EMPLOYIX
 ```
 
 ---
 
-# 🟢 Backend Setup
+## 2. Frontend Setup
 
-```bash
-cd server
+```
 npm install
-```
-
-Create env:
-
-```bash
-# Windows
-Copy-Item .env.example .env
-```
-
-Update `server/.env`:
-
-```
-PORT=5000
-MONGODB_URI=your_mongodb_uri
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_secret
-GOOGLE_CALLBACK_URL=http://localhost:5000/auth/google/callback
-FRONTEND_URL=http://localhost:5173
-CORS_ORIGIN=http://localhost:5173
-JWT_SECRET=your_secret_key
-```
-
-Run backend:
-
-```bash
 npm run dev
 ```
 
----
-
-# 🔵 Frontend Setup
-
-Open new terminal:
-
-```bash
-npm install
-```
-
-Create root `.env`:
+Create `.env` in root:
 
 ```
 VITE_API_BASE_URL=http://localhost:5000
 ```
 
-Run frontend:
+---
 
-```bash
+## 3. Backend Setup
+
+```
+cd server
+npm install
 npm run dev
 ```
 
+Create `server/.env`:
+
+```
+PORT=5000
+MONGODB_URI=your_mongodb_url
+JWT_SECRET=your_secret
+
+GOOGLE_CLIENT_ID=xxx
+GOOGLE_CLIENT_SECRET=xxx
+GOOGLE_CALLBACK_URL=http://localhost:5000/auth/google/callback
+
+FRONTEND_URL=http://localhost:5173
+CORS_ORIGIN=http://localhost:5173
+```
+
 ---
 
-# 🔐 OAuth Setup (Google Console)
+# 🔐 Google OAuth Setup
 
-Create OAuth client → Web application
-Add:
+Create OAuth credentials from Google Cloud Console.
 
-### Authorized JS origins:
-
-```
-http://localhost:5173
-http://localhost:5000
-```
-
-### Redirect URI:
+Authorized redirect URI:
 
 ```
 http://localhost:5000/auth/google/callback
-```
-
-Copy client ID & secret into backend `.env`.
-
----
-
-# 🔄 OAuth Flow
-
-1. User clicks Google login
-2. Backend authenticates via Google
-3. User stored in MongoDB
-4. JWT generated
-5. Redirect to frontend with token
-6. Role-based dashboard loads
-
----
-
-# 🔌 API Endpoints (Major)
-
-Auth:
-
-```
-GET  /auth/google
-GET  /auth/google/callback
-POST /auth/local-login
-POST /auth/forgot-password
-POST /auth/reset-password
-```
-
-Tasks:
-
-```
-POST /api/tasks
-GET  /api/tasks/team
-GET  /api/tasks/my
-PATCH /api/tasks/:id/status
-```
-
-Invites:
-
-```
-POST /api/invitations
-GET  /api/invitations
-POST /api/invitations/:id/resend
-POST /api/invitations/:id/revoke
-GET  /api/invitations/validate
-```
-
-Other:
-
-```
-GET /api/analytics/admin
-GET /api/notifications/my
-GET /api/audit-logs
-PUT /api/account/password
+https://employix-backend.onrender.com/auth/google/callback
 ```
 
 ---
 
 # 🚀 Deployment
 
-Frontend deployed on Vercel.
+## Frontend (Vercel)
 
-To deploy:
+* Import GitHub repo
+* Add env:
 
-```bash
-npm run build
+```
+VITE_API_BASE_URL=https://employix-backend.onrender.com
 ```
 
-Upload `/dist` to Vercel
-OR connect GitHub repo.
+## Backend (Render)
 
-For full production:
+* Create Web Service
+* Root directory: `server`
+* Start command:
 
-* Deploy backend on Render/Railway
-* Use MongoDB Atlas
-* Add env variables
+```
+node src/server.js
+```
+
+Add env variables:
+
+* MONGODB_URI
+* JWT_SECRET
+* GOOGLE_CLIENT_ID
+* GOOGLE_CLIENT_SECRET
+* GOOGLE_CALLBACK_URL
+* FRONTEND_URL
+* CORS_ORIGIN
+
+---
+
+# 🧪 API Endpoints
+
+### Auth
+
+* `GET /auth/google`
+* `POST /auth/local-login`
+* `POST /auth/forgot-password`
+* `POST /auth/reset-password`
+
+### User
+
+* `GET /api/me`
+
+### Admin
+
+* `POST /api/tasks`
+* `GET /api/tasks/team`
+* `POST /api/invitations`
+* `GET /api/employees`
+* `GET /api/analytics/admin`
+
+### Employee
+
+* `GET /api/tasks/my`
+* `PATCH /api/tasks/:id/status`
 
 ---
 
 # 🧑‍💻 Author
 
 **Sarthak Shukla**
-BTech CSE (AI) — KIET
-Aspiring Full Stack + AI Engineer
+B.Tech CSE (AI) — KIET Group of Institutions
 
-GitHub:
-https://github.com/sar1thak
-
-LinkedIn:
-https://www.linkedin.com/in/sarthak-shukla-794739298/
+GitHub: https://github.com/sar1thak
+LinkedIn: https://www.linkedin.com/in/sarthak-shukla-794739298/
 
 ---
 
@@ -365,19 +293,28 @@ https://www.linkedin.com/in/sarthak-shukla-794739298/
 
 This project demonstrates:
 
-* Full stack engineering
-* Production UI/UX thinking
-* Secure authentication
-* SaaS architecture design
-* Real-world feature implementation
+* Full-stack production architecture
+* OAuth authentication implementation
+* Real SaaS dashboard design
+* Secure backend engineering
+* MongoDB schema design
+* Deployment & DevOps understanding
 
-Built as a **resume-grade flagship project** for internships and full-stack roles.
+Suitable for:
+
+* Software Engineering Internships
+* Full Stack Developer roles
+* Startup portfolio projects
 
 ---
 
-# ⭐ Support
+# 📜 License
 
-If you like this project:
+This project is built for educational and portfolio purposes.
+Feel free to fork and build upon it.
 
-Give it a ⭐ on GitHub
-It helps a lot and motivates further development.
+---
+
+# 💬 Feedback
+
+If you found this project useful or inspiring, consider giving it a ⭐ on GitHub.
