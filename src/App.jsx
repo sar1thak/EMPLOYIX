@@ -167,12 +167,12 @@ const AuthSuccess = ({ onSuccess }) => {
 
     const loadUser = async () => {
       try {
+        // store token
         localStorage.setItem('authToken', token)
 
+        // fetch profile
         const response = await fetch(`${API_BASE_URL}/api/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` }
         })
 
         if (!response.ok) {
@@ -180,11 +180,23 @@ const AuthSuccess = ({ onSuccess }) => {
         }
 
         const profile = await response.json()
+
+        // set user globally
         onSuccess(profile)
-        navigate('/')
-      } catch {
+
+        // 🔥 redirect based on role
+        if (profile.role === 'admin') {
+          navigate('/', { replace: true })
+        } else if (profile.role === 'employee') {
+          navigate('/', { replace: true })
+        } else {
+          navigate('/', { replace: true })
+        }
+
+      } catch (err) {
+        console.error(err)
         localStorage.removeItem('authToken')
-        setError('OAuth login completed but profile fetch failed. Check backend and token.')
+        setError('OAuth login completed but profile fetch failed.')
       }
     }
 
@@ -193,20 +205,19 @@ const AuthSuccess = ({ onSuccess }) => {
 
   if (error) {
     return (
-      <div className="min-h-screen grid place-items-center bg-[#020617] text-white px-6 text-center">
-        <div className="max-w-xl">
+      <div className="min-h-screen grid place-items-center bg-[#020617] text-white">
+        <div>
           <h1 className="text-2xl font-semibold">Sign-in failed</h1>
-          <p className="mt-3 text-white/70">{error}</p>
+          <p className="text-white/70 mt-2">{error}</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen grid place-items-center bg-[#020617] text-white px-6 text-center">
+    <div className="min-h-screen grid place-items-center bg-[#020617] text-white">
       <div>
-        <h1 className="text-2xl font-semibold">Completing sign-in...</h1>
-        <p className="mt-3 text-white/70">Fetching your profile from server.</p>
+        <h1 className="text-2xl font-semibold">Signing you in...</h1>
       </div>
     </div>
   )
