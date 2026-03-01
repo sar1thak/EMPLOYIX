@@ -6,44 +6,57 @@ dotenv.config();
 
 const { default: app } = await import("./app.js");
 
-const port = Number(process.env.PORT || 5000);
+// 🔥 IMPORTANT: render provides PORT automatically
+const port = process.env.PORT || 10000;
 const mongoUri = process.env.MONGODB_URI;
 
+// 🔴 ENV DEBUG (will show in render logs)
+console.log("ENV CHECK:");
+console.log("PORT:", port);
+console.log("MONGO URI EXISTS:", mongoUri ? "YES" : "NO");
+console.log("JWT EXISTS:", process.env.JWT_SECRET ? "YES" : "NO");
+
 if (!mongoUri) {
-  throw new Error("MONGODB_URI is required in environment variables");
+  console.error("❌ MONGODB_URI missing");
+  process.exit(1);
 }
 
 if (!process.env.JWT_SECRET) {
-  throw new Error("JWT_SECRET is required in environment variables");
+  console.error("❌ JWT_SECRET missing");
+  process.exit(1);
 }
 
 const startServer = async () => {
-  await mongoose.connect(mongoUri);
-  console.log("MongoDB connected");
-
-  // One-time safety migration for old unique index on `notifications.key`
-  // that was indexing `null` and causing E11000 duplicate key errors.
-  const notificationCollection = mongoose.connection.collection("notifications");
   try {
-    const indexes = await notificationCollection.indexes();
-    const legacyKeyIndex = indexes.find((index) => index.name === "key_1");
-    if (legacyKeyIndex) {
-      await notificationCollection.dropIndex("key_1");
-    }
-  } catch (error) {
-    // Ignore when collection/indexes do not exist yet.
-    if (error?.codeName !== "NamespaceNotFound") {
-      throw error;
-    }
-  }
-  await Notification.syncIndexes();
+    // 🔥 connect mongo
+    await mongoose.connect(mongoUri);
+    console.log("✅ MongoDB connected");
 
-  app.listen(port, () => {
-    console.log(`Server listening on http://localhost:${port}`);
-  });
+    // ---- optional index fix (keep) ----
+    const notificationCollection = mongoose.connection.collection("notifications");
+    try {
+      const indexes = await notificationCollection.indexes();
+      const legacyKeyIndex = indexes.find((index) => index.name === "key_1");
+      if (legacyKeyIndex) {
+        await notificationCollection.dropIndex("key_1");
+      }
+    } catch (error) {
+      if (error?.codeName !== "NamespaceNotFound") {
+        console.log("Index warning:", error.message);
+      }
+    }
+
+    await Notification.syncIndexes();
+
+    // 🔥 start server
+    app.listen(port, "0.0.0.0", () => {
+      console.log(`🚀 Server running on port ${port}`);
+    });
+
+  } catch (error) {
+    console.error("❌ SERVER START FAILED:", error);
+    process.exit(1);
+  }
 };
 
-startServer().catch((error) => {
-  console.error("Failed to start server:", error);
-  process.exit(1);
-});
+startServer();
