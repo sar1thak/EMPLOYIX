@@ -43,33 +43,34 @@ export const configurePassport = () => {
           const avatar = profile.photos?.[0]?.value || "";
           const { role: requestedRole, inviteToken } = readOAuthState(req.query.state);
 
-          const existingUser = await User.findOne({
+          // 🔍 check existing user
+          let user = await User.findOne({
             $or: [{ googleId: profile.id }, { email }]
           });
 
-          if (existingUser) {
-            existingUser.googleId = profile.id;
-            existingUser.provider = "google";
-            existingUser.name = profile.displayName || existingUser.name;
-            existingUser.email = email;
-            existingUser.avatar = avatar;
-            await existingUser.save();
+          if (user) {
+            user.googleId = profile.id;
+            user.provider = "google";
+            user.name = profile.displayName || user.name;
+            user.email = email;
+            user.avatar = avatar;
+            await user.save();
+
             await AuditLog.create({
-              actor: existingUser._id,
+              actor: user._id,
               action: "oauth_login",
               targetType: "user",
-              targetId: String(existingUser._id),
-              metadata: { role: existingUser.role, email }
+              targetId: String(user._id),
+              metadata: { role: user.role, email }
             });
-            return done(null, existingUser);
+
+            return done(null, user);
           }
 
+          // 🔥 EMPLOYEE INVITE OPTIONAL (not required)
           let invite = null;
-          if (requestedRole === "employee") {
-            if (!inviteToken) {
-              return done(new Error("Employee invite token is required"), null);
-            }
 
+          if (requestedRole === "employee" && inviteToken) {
             invite = await Invitation.findOne({
               token: inviteToken,
               email,
@@ -77,12 +78,15 @@ export const configurePassport = () => {
               expiresAt: { $gt: new Date() }
             });
 
-            if (!invite) {
-              return done(new Error("Valid employee invitation is required"), null);
+            if (invite) {
+              invite.status = "accepted";
+              invite.acceptedBy = null;
+              await invite.save();
             }
           }
 
-          const user = await User.create({
+          // 🟢 create user normally
+          user = await User.create({
             provider: "google",
             googleId: profile.id,
             role: requestedRole,
@@ -92,9 +96,9 @@ export const configurePassport = () => {
           });
 
           if (invite) {
-            invite.status = "accepted";
             invite.acceptedBy = user._id;
             await invite.save();
+
             await AuditLog.create({
               actor: user._id,
               action: "invite_accepted",
@@ -113,7 +117,9 @@ export const configurePassport = () => {
           });
 
           return done(null, user);
+
         } catch (error) {
+          console.error("GOOGLE OAUTH ERROR:", error);
           return done(error, null);
         }
       }
